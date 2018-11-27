@@ -1,0 +1,51 @@
+CR
+
+: COMPARE_ADD
+   DROP 2
+   s" {+" COMPARE ;
+
+: COMPARE_SUB
+   DROP 2
+   s" {-" COMPARE ;
+
+: COMPARE_DIV
+   DROP 2
+   s" {/" COMPARE ;
+
+: COMPARE_MUL
+   DROP 2
+   s" {*" COMPARE ;
+
+: GET_OPERANDS
+   DROP DUP
+   3 + c@ 48 -
+   SWAP
+   5 + c@ 48 - ;
+
+: INTERP 
+   2DUP 
+   COMPARE_ADD 0= IF GET_OPERANDS + ELSE
+   2DUP 
+   COMPARE_SUB 0= IF GET_OPERANDS - ELSE
+   2DUP 
+   COMPARE_DIV 0= IF GET_OPERANDS / ELSE
+   2DUP 
+   COMPARE_MUL 0= IF GET_OPERANDS * ELSE
+   THEN THEN THEN THEN ; 
+
+: PASS
+   ." Test passed." ;
+
+: FAIL
+   ." Test failed." ;
+
+: CHECK
+   = IF PASS ELSE FAIL THEN CR ;
+
+s" {+ 2 3}" INTERP 5 CHECK
+s" {- 5 3}" INTERP 2 CHECK
+s" {/ 9 3}" INTERP 3 CHECK
+s" {* 3 3}" INTERP 9 CHECK
+
+ 
+
