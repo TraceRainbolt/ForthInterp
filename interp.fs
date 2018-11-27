@@ -9,13 +9,13 @@ DEFER INTERP
       1 + DUP c@ DUP
       125 = IF
          ROT DUP
-      0= IF
-         DROP DROP LEAVE
-      ELSE
-         1 - SWAP DROP SWAP
-      THEN
+         0= IF
+            DROP DROP LEAVE
          ELSE
-            123 = IF
+            1 - SWAP DROP SWAP
+         THEN
+      ELSE
+         123 = IF
             SWAP 1 + SWAP
          THEN
       THEN
