@@ -1,4 +1,4 @@
-CR CR
+CR
 
 DEFER INTERP
 
@@ -6,21 +6,19 @@ DEFER INTERP
    2DUP 2DUP
    0 ROT ROT
    0 DO
-      1 +
-      DUP
-      c@ DUP
+      1 + DUP c@ DUP
       125 = IF
-	       ROT DUP
-	       0= IF
-	             DROP DROP LEAVE
-                  ELSE
-                     1 - SWAP DROP SWAP
-                  THEN
-           ELSE
-	       123 = IF
-			SWAP 1 + SWAP
-                     THEN
-           THEN
+         ROT DUP
+      0= IF
+         DROP DROP LEAVE
+      ELSE
+         1 - SWAP DROP SWAP
+      THEN
+         ELSE
+            123 = IF
+            SWAP 1 + SWAP
+         THEN
+      THEN
    LOOP
    ROT - SWAP DROP 1 + ;
 
@@ -41,38 +39,29 @@ DEFER INTERP
    s" {*" COMPARE ;
 
 : GET_OPERANDS
-   OVER
-   3 +
-   DUP c@
+   OVER 3 + DUP c@
    123 = IF
-	 OVER 3 -
-	 GET_LENGTH
-	 SWAP DROP INTERP
-	 ROT ROT
-	 1 + +
-	 DUP c@
-	 123 = IF
-	        ROT 3 -
-		GET_LENGTH
-		SWAP DROP INTERP
-		ROT ROT DROP DROP
-	       ELSE
-		c@ 48 -
-	       THEN
-	 ELSE
-	    DUP c@ 48 -
-	    SWAP
-            2 +
-	    DUP c@
-	    123 = IF
-		     ROT 5 -
-		     GET_LENGTH
-		     SWAP DROP INTERP
-		     ROT ROT DROP DROP
-		  ELSE
-		  c@ 48 -
-		  THEN
-	 THEN ;
+      OVER 3 - GET_LENGTH
+      SWAP DROP INTERP
+      ROT ROT 1 + + DUP c@
+      123 = IF
+         ROT 3 - GET_LENGTH
+         SWAP DROP INTERP
+         ROT ROT DROP DROP
+      ELSE
+         c@ 48 -
+      THEN
+   ELSE
+      DUP c@ 48 -
+      SWAP 2 + DUP c@
+      123 = IF
+         ROT 5 - GET_LENGTH
+         SWAP DROP INTERP
+         ROT ROT DROP DROP
+      ELSE
+         c@ 48 -
+      THEN
+   THEN ;
 
 :noname
    2DUP
